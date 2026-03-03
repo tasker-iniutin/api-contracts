@@ -18,6 +18,21 @@ message GetTaskRequest {
   string id = 1;
 }
 
+message ListTasksRequest {
+  uint32 limit = 1; // ~50
+  uint32 offset = 2;
+
+  string status = 3;
+  string query = 4;
+
+  reserved 5 to 10;
+}
+
+message ListTasksResponce {
+  repeted Task tasks = 1;
+  uint32 total = 2;
+}
+
 message Task {
   string id = 1;
   string title = 2;
@@ -36,6 +51,12 @@ service TaskService {
   rpc GetTask(GetTaskRequest) returns (Task) {
     option (google.api.http) = {
       get: "/v1alpha/tasks/{id}"
+    };
+  }
+
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponce) {
+    option (google.api.http) = {
+      get: "/v1alpha/tasks"
     };
   }
 }
