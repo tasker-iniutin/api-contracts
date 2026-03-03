@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package notify.v1alpha;
+
+option go_package = "github.com/you/todo/api-contracts/notify/v1alpha;notifypb";
+
+import "google/protobuf/timestamp.proto";
+
+enum NotificationType {
+  NOTIFICATION_TYPE_UNSPECIFIED = 0;
+  TASK_CREATED = 1;
+  TASK_COMPLETED = 2;
+  TASK_DELETED = 3;
+}
+
+message Notification {
+  string id = 1;
+  string user_id = 2;
+  NotificationType type = 3;
+  string task_id = 4;
+
+  string title = 5;
+  string body = 6;
+
+  bool read = 7;
+  google.protobuf.Timestamp created_at = 8;
+
+  reserved 9, 10;
+}
+
+message CreateNotificationRequest {
+  string idempotency_key = 1;
+
+  string user_id = 2;
+  NotificationType type = 3;
+  string task_id = 4;
+
+  string title = 5;
+  string body = 6;
+}
+
+message CreateNotificationResponse {
+  Notification notification = 1;
+}
+
+message ListNotificationsRequest {
+  string user_id = 1;
+
+  uint32 page_size = 2;
+  string page_token = 3;
+
+  bool unread_only = 4;
+}
+
+message ListNotificationsResponse {
+  repeated Notification notifications = 1;
+  string next_page_token = 2;
+}
+
+message MarkReadRequest {
+  string user_id = 1;
+  string notification_id = 2;
+}
+
+message MarkReadResponse {
+  Notification notification = 1;
+}
+
+message DeleteNotificationRequest {
+  string user_id = 1;
+  string notification_id = 2;
+}
+
+message DeleteNotificationResponse {}
+
+service NotifyService {
+  rpc CreateNotification(CreateNotificationRequest)
+      returns (CreateNotificationResponse);
+
+  rpc ListNotifications(ListNotificationsRequest)
+      returns (ListNotificationsResponse);
+
+  rpc MarkRead(MarkReadRequest)
+      returns (MarkReadResponse);
+
+  rpc DeleteNotification(DeleteNotificationRequest)
+      returns (DeleteNotificationResponse);
+}

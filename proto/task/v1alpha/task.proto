@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package task.v1alpha;
+
+option go_package = "github.com/you/todo/api-contracts/task/v1alpha;taskpb";
+
+import "google/api/annotations.proto";
+
+message CreateTaskRequest {
+  string title = 1;
+  string text = 2;
+
+  reserved 3 to 10;
+  reserved "due_to", "from_the";
+}
+
+message GetTaskRequest {
+  string id = 1;
+}
+
+message Task {
+  string id = 1;
+  string title = 2;
+  string text = 3;
+  string status = 4;
+}
+
+service TaskService {
+  rpc CreateTask(CreateTaskRequest) returns (Task) {
+    option (google.api.http) = {
+      post: "/v1alpha/tasks"
+      body: "*"
+    };
+  }
+
+  rpc GetTask(GetTaskRequest) returns (Task) {
+    option (google.api.http) = {
+      get: "/v1alpha/tasks/{id}"
+    };
+  }
+}

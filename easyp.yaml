@@ -1,0 +1,17 @@
+version: 'v1alpha'
+deps: []
+generate:
+  inputs:
+    - directory: "proto"
+  plugins:
+  - name: go
+    out: "./gen/go"
+    opts: { paths: source_relative }
+  - name: go-grpc
+    out: "./gen/go"
+    opts: { paths: source_relative }
+  - name: grpc-gateway
+    out: "./gen/go"
+    opts: { paths: source_relative }
+  - name: openapiv2
+    out: "./gen/openapi"
