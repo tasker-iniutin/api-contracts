@@ -2,9 +2,16 @@ syntax = "proto3";
 
 package task.v1alpha;
 
-option go_package = "github.com/you/todo/api-contracts/task/v1alpha;taskpb";
+option go_package = "github.com/tasker-iniutin/api-contracts/task/v1alpha";
 
 import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+enum TaskStatus {
+  TASK_STATUS_UNSPECIFIED = 0;
+  TASK_STATUS_NEW = 1;
+  TASK_STATUS_DONE = 2;
+}
 
 message CreateTaskRequest {
   string title = 1;
@@ -14,33 +21,49 @@ message CreateTaskRequest {
   reserved "due_to", "from_the";
 }
 
+message UpdateTaskRequest {
+  string id = 1;
+  string title = 2;
+  string text = 3;
+  TaskStatus status = 4;
+}
+
+message DeleteTaskRequest {
+  string id = 1;
+}
+
 message GetTaskRequest {
   string id = 1;
 }
 
 message ListTasksRequest {
-  uint32 limit = 1; // ~50
-  uint32 offset = 2;
+  uint32 page_size = 1;
+  string page_token = 2;
 
-  string status = 3;
+  TaskStatus status = 3;
   string query = 4;
 
   reserved 5 to 10;
 }
 
-message ListTasksResponce {
-  repeted Task tasks = 1;
+message ListTasksResponse {
+  repeated Task tasks = 1;
   uint32 total = 2;
 }
 
 message Task {
   string id = 1;
-  string title = 2;
-  string text = 3;
-  string status = 4;
+  string user_id = 2;
+  string title = 3;
+  string text = 4;
+  TaskStatus status = 5;
+
+  reserved 6 to 10;
+  reserved "due_to", "from_the";
 }
 
 service TaskService {
+
   rpc CreateTask(CreateTaskRequest) returns (Task) {
     option (google.api.http) = {
       post: "/v1alpha/tasks"
@@ -54,9 +77,22 @@ service TaskService {
     };
   }
 
-  rpc ListTasks(ListTasksRequest) returns (ListTasksResponce) {
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {
     option (google.api.http) = {
       get: "/v1alpha/tasks"
+    };
+  }
+
+  rpc UpdateTask(UpdateTaskRequest) returns (Task) {
+    option (google.api.http) = {
+      patch: "/v1alpha/tasks/{id}"
+      body: "*"
+    };
+  }
+
+  rpc DeleteTask(DeleteTaskRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1alpha/tasks/{id}"
     };
   }
 }

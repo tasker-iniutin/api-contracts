@@ -1,4 +1,4 @@
-module github.com/you/todo/api-contracts
+module github.com/tasker-iniutin/api-contracts
 
 go 1.24.0
 

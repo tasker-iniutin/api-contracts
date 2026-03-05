@@ -17,6 +17,61 @@
   ],
   "paths": {
     "/v1alpha/tasks": {
+      "get": {
+        "operationId": "TaskService_ListTasks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1alphaListTasksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "~50",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "TASK_STATUS_UNSPECIFIED",
+              "TASK_STATUS_NEW",
+              "TASK_STATUS_DONE"
+            ],
+            "default": "TASK_STATUS_UNSPECIFIED"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      },
       "post": {
         "operationId": "TaskService_CreateTask",
         "responses": {
@@ -119,6 +174,22 @@
         }
       }
     },
+    "v1alphaListTasksResponse": {
+      "type": "object",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1alphaTask"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "v1alphaTask": {
       "type": "object",
       "properties": {
@@ -132,9 +203,18 @@
           "type": "string"
         },
         "status": {
-          "type": "string"
+          "$ref": "#/definitions/v1alphaTaskStatus"
         }
       }
+    },
+    "v1alphaTaskStatus": {
+      "type": "string",
+      "enum": [
+        "TASK_STATUS_UNSPECIFIED",
+        "TASK_STATUS_NEW",
+        "TASK_STATUS_DONE"
+      ],
+      "default": "TASK_STATUS_UNSPECIFIED"
     }
   }
 }

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package notify.v1alpha;
 
-option go_package = "github.com/you/todo/api-contracts/notify/v1alpha;notifypb";
+option go_package = "github.com/tasker-iniutin/api-contracts/notify/v1alpha";
 
 import "google/protobuf/timestamp.proto";
 
