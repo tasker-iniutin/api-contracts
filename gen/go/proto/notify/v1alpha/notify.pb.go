@@ -4,7 +4,7 @@
 // 	protoc        v0.14.1-v0.14.0-bufbuild-protocompile-easyp
 // source: proto/notify/v1alpha/notify.proto
 
-package notifypb
+package v1alpha
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -660,7 +660,7 @@ const file_proto_notify_v1alpha_notify_proto_rawDesc = "" +
 	"\x12CreateNotification\x12).notify.v1alpha.CreateNotificationRequest\x1a*.notify.v1alpha.CreateNotificationResponse\x12h\n" +
 	"\x11ListNotifications\x12(.notify.v1alpha.ListNotificationsRequest\x1a).notify.v1alpha.ListNotificationsResponse\x12M\n" +
 	"\bMarkRead\x12\x1f.notify.v1alpha.MarkReadRequest\x1a .notify.v1alpha.MarkReadResponse\x12k\n" +
-	"\x12DeleteNotification\x12).notify.v1alpha.DeleteNotificationRequest\x1a*.notify.v1alpha.DeleteNotificationResponseB;Z9github.com/you/todo/api-contracts/notify/v1alpha;notifypbb\x06proto3"
+	"\x12DeleteNotification\x12).notify.v1alpha.DeleteNotificationRequest\x1a*.notify.v1alpha.DeleteNotificationResponseB8Z6github.com/tasker-iniutin/api-contracts/notify/v1alphab\x06proto3"
 
 var (
 	file_proto_notify_v1alpha_notify_proto_rawDescOnce sync.Once

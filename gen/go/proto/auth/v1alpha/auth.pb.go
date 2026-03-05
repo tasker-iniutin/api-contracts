@@ -4,7 +4,7 @@
 // 	protoc        v0.14.1-v0.14.0-bufbuild-protocompile-easyp
 // source: proto/auth/v1alpha/auth.proto
 
-package authpb
+package v1alpha
 
 import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -26,7 +26,7 @@ const (
 
 type User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Login         string                 `protobuf:"bytes,3,opt,name=login,proto3" json:"login,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -63,11 +63,11 @@ func (*User) Descriptor() ([]byte, []int) {
 	return file_proto_auth_v1alpha_auth_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *User) GetId() uint64 {
+func (x *User) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *User) GetEmail() string {
@@ -432,7 +432,7 @@ const file_proto_auth_v1alpha_auth_proto_rawDesc = "" +
 	"\n" +
 	"\x1dproto/auth/v1alpha/auth.proto\x12\fauth.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"B\n" +
 	"\x04User\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x14\n" +
 	"\x05login\x18\x03 \x01(\tR\x05login\"Y\n" +
 	"\x0fRegisterRequest\x12\x14\n" +
@@ -459,7 +459,7 @@ const file_proto_auth_v1alpha_auth_proto_rawDesc = "" +
 	"\bRegister\x12\x1d.auth.v1alpha.RegisterRequest\x1a\x1a.auth.v1alpha.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1alpha/auth/register\x12_\n" +
 	"\x05Login\x12\x1a.auth.v1alpha.LoginRequest\x1a\x1a.auth.v1alpha.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1alpha/auth/login\x12b\n" +
 	"\aRefresh\x12\x1c.auth.v1alpha.RefreshRequest\x1a\x17.auth.v1alpha.TokenPair\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1alpha/auth/refresh\x12^\n" +
-	"\x06Logout\x12\x1b.auth.v1alpha.LogoutRequest\x1a\x16.google.protobuf.Empty\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1alpha/auth/logoutB7Z5github.com/you/todo/api-contracts/auth/v1alpha;authpbb\x06proto3"
+	"\x06Logout\x12\x1b.auth.v1alpha.LogoutRequest\x1a\x16.google.protobuf.Empty\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1alpha/auth/logoutB6Z4github.com/tasker-iniutin/api-contracts/auth/v1alphab\x06proto3"
 
 var (
 	file_proto_auth_v1alpha_auth_proto_rawDescOnce sync.Once

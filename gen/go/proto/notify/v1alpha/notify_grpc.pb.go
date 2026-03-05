@@ -4,7 +4,7 @@
 // - protoc             v0.14.1-v0.14.0-bufbuild-protocompile-easyp
 // source: proto/notify/v1alpha/notify.proto
 
-package notifypb
+package v1alpha
 
 import (
 	context "context"

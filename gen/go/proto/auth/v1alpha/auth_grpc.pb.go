@@ -4,7 +4,7 @@
 // - protoc             v0.14.1-v0.14.0-bufbuild-protocompile-easyp
 // source: proto/auth/v1alpha/auth.proto
 
-package authpb
+package v1alpha
 
 import (
 	context "context"

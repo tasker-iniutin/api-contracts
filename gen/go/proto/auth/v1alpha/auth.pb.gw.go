@@ -2,11 +2,11 @@
 // source: proto/auth/v1alpha/auth.proto
 
 /*
-Package authpb is a reverse proxy.
+Package v1alpha is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package authpb
+package v1alpha
 
 import (
 	"context"
