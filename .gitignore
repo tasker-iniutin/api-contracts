@@ -1,7 +1,6 @@
 bin/
 dist/
 tmp/
-gen/
 google/
 
 .env
